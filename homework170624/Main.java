@@ -1,16 +1,13 @@
-package HomeWork240617;
+package homework170624;
 
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
-
-import static HomeWork240617.SimpleUnit.*;
+import static homework170624.SimpleUnit.*;
 
 /**
-
  * Created by Ilya on 26.06.2017.
  */
 public class Main {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
         //sing(int a) test
         //
@@ -21,9 +18,9 @@ public class Main {
 
         //mod(int a,int b) test
         //
-        System.out.println(mod(20,2));
-        System.out.println(mod(55,0));
-        System.out.println(mod(-12,5));
+        System.out.println(mod(20, 2));
+        System.out.println(mod(55, 0));
+        System.out.println(mod(-12, 5));
 
 
         //isPrime(int a) test
