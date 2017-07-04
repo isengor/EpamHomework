@@ -31,21 +31,7 @@ public class Main {
         //Genome, sort/hash
         //////////////////////////
 
-        byte[] data = DataGenerator.generate(GenomeWithSort.GENOME_SIZE);
 
-        List<GenomeWithSort.Word> list = new ArrayList<>();
-
-        for (int i = 0; i < data.length - GenomeWithSort.WORD_SIZE; i++) {
-            list.add(new GenomeWithSort.Word(data, i));
-        }
-
-        Collections.sort(list);
-
-        for (GenomeWithSort.Word word : list) {
-            byte[] wordBytes = Arrays.copyOfRange(data, word.offset,
-                    word.offset + GenomeWithSort.WORD_SIZE);
-            System.out.println(Arrays.toString(wordBytes));
-        }
 
     }
 }
