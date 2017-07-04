@@ -23,8 +23,4 @@ public class Matrix {
         return sum;
     }
 
-    public static void main(String[] args) {
-
-    }
-
 }
