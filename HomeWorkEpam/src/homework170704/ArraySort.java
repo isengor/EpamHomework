@@ -39,8 +39,9 @@ public class ArraySort {
     public static void quickSort(int[] arr) {
         long start = System.nanoTime();
         Arrays.sort(arr);
-        System.out.println("Quicsort start: "
+        System.out.println("Quicksort runtime: "
                 + (float) (System.nanoTime() - start) / 1000000
                 + " ms.");
+
     }
 }

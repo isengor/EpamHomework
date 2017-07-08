@@ -1,10 +1,5 @@
 package homework170701;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 /**
  * Created by Ilya on 02.07.2017.
  */

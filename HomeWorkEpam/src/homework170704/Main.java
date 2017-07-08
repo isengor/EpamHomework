@@ -14,7 +14,8 @@ public class Main {
         //
         //diff between quicksort and radixsort(optional)
         //////////////////////////
-        //ArraySort.quickSort(arr);
-        ArraySort.radixSort(arr);
+
+        // ArraySort.radixSort(arr);
+        ArraySort.quickSort(arr);
     }
 }

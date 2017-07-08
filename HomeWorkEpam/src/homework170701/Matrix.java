@@ -8,7 +8,7 @@ public class Matrix {
 //    Написать метод, печатающий сумму элементов в ряду 2D матрицы,
 //    но только если в этом ряду нет отрицательных чисел
 
-    public static int rowSum(int[][] matrix, int row) {
+    public static int rowSum(int[][] matrix, int row) throws IndexOutOfBoundsException {
         int sum = 0;
 
         for (int i = 0; i < matrix[row].length; i++) {

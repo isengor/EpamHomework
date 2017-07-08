@@ -3,16 +3,11 @@ package homework170707;
 /**
  * Created by Ilya on 07.07.2017.
  */
-public class Main {
-    public static void main(String[] args) {
-        String s = "  sds sd    ";
+public class MyString {
+    //написать String.replace() с использованием ттд
+    // + String.trim свою реализацию
 
-        System.out.println(myTrim(s));
-        
-
-    }
-
-    public static String myTrim(String s) {
+    public static String trim(String s) {
         if (s == null || s.length() == 0) {
             return s;
         }
@@ -30,11 +25,14 @@ public class Main {
         }
         for (int i = 0; i < s.length(); i++) {
             if ((int) s.charAt(i) > 32) {
-
                 end = i;
             }
         }
 
         return s.substring(start, end + 1);
+    }
+
+    public static String replace(String s1, String s2) {
+        return null;
     }
 }
