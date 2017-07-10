@@ -32,7 +32,13 @@ public class MyString {
         return s.substring(start, end + 1);
     }
 
-    public static String replace(String s1, String s2) {
-        return null;
+    public static String replace(String s, char char1, char char2) {
+        char[] chars = s.toCharArray();
+        for (int i = 0; i < chars.length; i++) {
+            if (chars[i] == char1) {
+                chars[i] = char2;
+            }
+        }
+        return new String(chars);
     }
 }
