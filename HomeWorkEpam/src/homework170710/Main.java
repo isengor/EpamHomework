@@ -1,24 +1,25 @@
 package homework170710;
 
-import java.math.BigDecimal;
-
 /**
  * Created by Ilya on 10.07.2017.
  */
 public class Main {
 
     public static void main(String[] args) {
-        BigDecimal start = new BigDecimal(System.nanoTime());
+        StringLinkedList stringLinkedList = new StringLinkedList();
+
+        stringLinkedList.add("one");
+        stringLinkedList.add("two");
+        stringLinkedList.add("three");
+        stringLinkedList.add("four");
+        stringLinkedList.add("five");
 
 
-//        try {
-//            sleep(1);
-//        }
-//        catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
+        // System.out.println(stringLinkedList.remove("four"));
+        System.out.println(stringLinkedList.remove(0));
+        System.out.println(stringLinkedList.remove(3));
+        System.out.println(stringLinkedList);
 
 
-        System.out.println(new BigDecimal(System.nanoTime()).subtract(start));
     }
 }
