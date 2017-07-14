@@ -7,6 +7,8 @@ import java.util.Arrays;
  */
 public class StringStack {
 
+    //TODO: hometask: реализовать Stack на массиве с TDD
+
     private static final int DEFAULT_MAX_ZISE = 3;
     private String[] elements;
     private int size;
@@ -21,6 +23,10 @@ public class StringStack {
         size = 0;
     }
 
+    public boolean isEmpty() {
+        return size == 0 ? true : false;
+    }
+
     public boolean push(String one) {
         if (size >= elements.length) { //guard condition
             return false;
@@ -30,6 +36,13 @@ public class StringStack {
     }
 
     public int size() {
+        return size;
+    }
+
+    public int search(String s) {
+        //TODO: Метод ищет заданный элемент в стеке, возвращая количество операций pop,
+        // которые требуются для того чтобы перевести искомый элемент в вершину стека.
+        // Если заданный элемент в стеке отсутствует, этот метод возвращает -1.
         return 0;
     }
 
@@ -39,6 +52,15 @@ public class StringStack {
         }
         String result = elements[--size];
         elements[size] = null;
+        return result;
+    }
+
+    public String peek() {
+        if (size <= 0) {           //guard condition
+            return null;           //stack underflow
+        }
+        String result = elements[size - 1];
+
         return result;
     }
 
