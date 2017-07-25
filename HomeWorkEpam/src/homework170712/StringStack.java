@@ -39,13 +39,6 @@ public class StringStack {
         return size;
     }
 
-    public int search(String s) {
-        //TODO: Метод ищет заданный элемент в стеке, возвращая количество операций pop,
-        // которые требуются для того чтобы перевести искомый элемент в вершину стека.
-        // Если заданный элемент в стеке отсутствует, этот метод возвращает -1.
-        return 0;
-    }
-
     public String pop() {
         if (size <= 0) {           //guard condition
             return null;           //stack underflow
