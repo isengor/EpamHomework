@@ -6,37 +6,22 @@ public class Main {
 
         Dictionary<String, String> dictionary = new Dictionary<>();
 
+        putTest(dictionary, 1000);
+
+        dictionary = new Dictionary<>();
+
+        putTest(dictionary, 10000);
+
+        dictionary = new Dictionary<>();
+
+        putTest(dictionary, 100000);
+    }
+
+    public static void putTest(Dictionary d, int quantity) {
         long start = System.currentTimeMillis();
 
-        for (int i = 0; i < 1000; i++) {
-
-            dictionary.put("key" + i, "value" + i);
-
-        }
-
-        System.out.println("Elapsed: " + (System.currentTimeMillis() - start));
-
-
-        dictionary = new Dictionary<>();
-
-        start = System.currentTimeMillis();
-
-        for (int i = 0; i < 10000; i++) {
-
-            dictionary.put("key" + i, "value" + i);
-
-        }
-
-        System.out.println("Elapsed: " + (System.currentTimeMillis() - start));
-
-        dictionary = new Dictionary<>();
-
-        start = System.currentTimeMillis();
-
-        for (int i = 0; i < 100000; i++) {
-
-            dictionary.put("key" + i, "value" + i);
-
+        for (int i = 0; i < quantity; i++) {
+            d.put("key" + 1, "value" + 1);
         }
 
         System.out.println("Elapsed: " + (System.currentTimeMillis() - start));

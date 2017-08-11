@@ -59,10 +59,8 @@ public class Dictionary<K, V> implements Iterable<Dictionary<K, V>.Pair> {
         List<Pair> newData[] = new List[data.length * 2];
 
         for (int i = 0; i < data.length; i++) {
-            for (int j = 0; j < data[i].size(); j++) {
-                if (oldData[i] != null) {
-                    newData[i].addAll(oldData[i]);
-                }
+            if (oldData[i] != null) {
+                newData[i].addAll(oldData[i]);
             }
         }
 
