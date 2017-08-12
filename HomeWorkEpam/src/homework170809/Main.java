@@ -21,7 +21,7 @@ public class Main {
         long start = System.currentTimeMillis();
 
         for (int i = 0; i < quantity; i++) {
-            d.put("key" + 1, "value" + 1);
+            d.put("key" + i, "value" + i);
         }
 
         System.out.println("Elapsed: " + (System.currentTimeMillis() - start));

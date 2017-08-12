@@ -35,7 +35,7 @@ public class Dictionary<K, V> implements Iterable<Dictionary<K, V>.Pair> {
 
         if (data[index] == null) {
 
-            if (existsDataIndex > data.length * 0.9)  //if data overflow > 90%, double length
+            if (existsDataIndex > data.length * 0.7)  //if data overflow > 90%, double length
             {
                 resize();
             }
