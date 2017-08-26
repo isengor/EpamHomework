@@ -21,10 +21,6 @@ class Card {
 	private final int suit;
 	private boolean faceup;
 
-	//TWO VERY IMPORTANT FIELDS ADDED, NOW EACH CARD HAS THEIR OWN X n Y!!!!!!1111
-	public int x;
-	public int y;
-	
 	Card link;
 
 	// constructor
@@ -37,8 +33,7 @@ class Card {
 	
 	public void draw(final Graphics g, final int x, final int y) { 
 		// clear rectangle, draw border
-		this.x=x;
-		this.y=y;
+
 		g.clearRect(x, y, width, height);
 		g.setColor(Color.black);
 		g.drawRect(x, y, width, height);

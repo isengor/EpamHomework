@@ -1,16 +1,18 @@
 import java.applet.Applet;
 import java.awt.Event;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class Solitare extends Applet {
+public class Solitare extends Applet implements MouseListener{
 
     /*
     - дать возможность указывать место, куда класть карту
 - дать возможность выбирать не одну карту,
   а несколько: выбрать карту и все на ней лежащие
-- по двойному клику перемещать в стопки с мастями (optional)
-- автоматически переворачитвать верхнюю карту рубашкой вниз в TablePile
-- когда колода DeckPile заканчивается, клик на пустой рамке на ней
+- по двойному клику перемещать в стопки с мастями (optional) 			@DONE
+- автоматически переворачитвать верхнюю карту рубашкой вниз в TablePile @DONE
+- когда колода DeckPile заканчивается, клик на пустой рамке на ней 		@DONE
   должен перенести все карты из DiscardPile обратно в неё (в DeckPile).
   не забыть перевернуть все перемещённые карты рубашкой вверх
      */
@@ -23,6 +25,9 @@ public class Solitare extends Applet {
 
 	@Override
 	public void init() {
+
+		addMouseListener(this);
+
 		// first allocate the arrays
 		allPiles = new CardPile[13];
 		suitPile = new SuitPile[4];
@@ -40,21 +45,43 @@ public class Solitare extends Applet {
 
 	@Override
 	public void paint(Graphics g) {
+
 		for (int i = 0; i < 13; i++) {
 			allPiles[i].display(g);
 		}
 	}
 
+
+
 	@Override
-	public boolean mouseDown(Event evt, int x, int y) {
+	public void mouseClicked(MouseEvent e) {
 		for (int i = 0; i < 13; i++) {
-			if (allPiles[i].includes(x, y)) {
-				allPiles[i].select(x, y);
+			if (allPiles[i].includes(e)) {
+				allPiles[i].select(e);
 				repaint();
-				return true;
+				break;
 			}
 		}
-		return true;
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+
 	}
 
 

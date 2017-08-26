@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 class SuitPile extends CardPile {
 
 	SuitPile(int x, int y) {
@@ -12,5 +14,6 @@ class SuitPile extends CardPile {
 		Card topCard = top();
 		return (aCard.getSuit() == topCard.getSuit())
 				&& (aCard.getRank() == 1 + topCard.getRank());
+
 	}
 }

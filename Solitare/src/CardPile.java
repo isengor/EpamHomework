@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
 
 class CardPile {
 
@@ -41,13 +42,14 @@ class CardPile {
 
 	// the following are sometimes overridden
 
-	public boolean includes(final int clickX, final int clickY) {
-
+	public boolean includes(MouseEvent mouseEvent) {
+			int clickX = mouseEvent.getX();
+			int clickY = mouseEvent.getY();
 		return x <= clickX && clickX <= x + Card.width && y <= clickY
 				&& clickY <= y + Card.height;
 	}
 
-	public void select(final int tx, final int ty) {
+	public void select(MouseEvent mouseEvent) {
 		// do nothing
 	}
 

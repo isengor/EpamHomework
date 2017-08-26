@@ -1,4 +1,5 @@
-import java.awt.Graphics;
+import java.awt.*;
+import java.awt.event.MouseEvent;
 
 class TablePile extends CardPile {
 
@@ -25,14 +26,16 @@ class TablePile extends CardPile {
 	}
 
 	@Override
-	public boolean includes(int tx, int ty) {
-		//fixed Y range click, now we can check each cards X & Y fields, not only pile as before
+	public boolean includes(MouseEvent mouseEvent) {
+		int tx = mouseEvent.getX();
+		int ty = mouseEvent.getY();
 
-		return x <= tx && tx <= x + Card.width && top().y  <= ty && ty <=top().y+Card.height;
+		// doesn't test bottom of card
+		return x <= tx && tx <= x + Card.width && y <= ty;
 	}
 
 	@Override
-	public void select(int tx, int ty) {
+	public void select(MouseEvent mouseEvent) {
 		if (empty()) {
 			return;
 		}
@@ -44,31 +47,45 @@ class TablePile extends CardPile {
 			return;
 		}
 
+
+
 		// else see if any suit pile can take card
 		topCard = pop();
-		for (int i = 0; i < 4; i++) {
-			if (Solitare.suitPile[i].canTake(topCard)) {    //смотрим можем ли мы закинуть карту наверх в suitpile
-				Solitare.suitPile[i].push(topCard);			//и есди да, соответственно кидаем её в подходящую колоду
-				return;
+
+		if(mouseEvent.getClickCount()==2) { //double click listener
+			System.out.println("double");
+			for (int i = 0; i < 4; i++) {
+				if (Solitare.suitPile[i].canTake(topCard)) {    //смотрим можем ли мы закинуть карту наверх в suitpile
+					if(topCard.link!=null){
+						topCard.link.flip();
+					}
+					Solitare.suitPile[i].push(topCard);            //и есди да, соответственно кидаем её в подходящую колоду
+
+					return;
+				}
 			}
 		}
 		//TODO: мы должны сначала выделить карту по которой был клик, а уже затем проверять куда был сделан следующий клик
 		//TODO: и только тогда перекидываем карту или же снимаем выделение цветом
 
 		// else see if any other table pile can take card
-		for (int i = 0; i < 7; i++) {
-			if (Solitare.tablePile[i].canTake(topCard)) {
-				Solitare.tablePile[i].push(topCard);				//а здесь мы пробегаемся по колодам на столе, и перекидываем
-															//карту в подходящую колоду
-				return;
-			}
-		}
+//		for (int i = 0; i < 7; i++) {
+//			if (Solitare.tablePile[i].canTake(topCard)) {
+//				topCard.link.flip();
+//				Solitare.tablePile[i].push(topCard);				//а здесь мы пробегаемся по колодам на столе, и перекидываем
+//											//карту в подходящую колоду
+//				return;
+//			}
+//		}
+
+
 		// else put it back on our pile
 		push(topCard);
 	}
 
 	private int stackDisplay(Graphics g, Card aCard) {
 		int localy;
+
 		if (aCard == null) {
 			return y;
 		}

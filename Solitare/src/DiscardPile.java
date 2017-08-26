@@ -1,3 +1,5 @@
+import java.awt.event.MouseEvent;
+
 class DiscardPile extends CardPile {
 
 	DiscardPile(int x, int y) {
@@ -13,7 +15,7 @@ class DiscardPile extends CardPile {
 	}
 
 	@Override
-	public void select(int tx, int ty) {
+	public void select(MouseEvent mouseEvent) {
 		if (empty()) {
 			return;
 		}

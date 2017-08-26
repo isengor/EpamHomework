@@ -1,3 +1,8 @@
+import com.sun.jmx.remote.internal.ArrayQueue;
+
+import java.awt.event.MouseEvent;
+import java.util.*;
+
 class DeckPile extends CardPile {
 
 	DeckPile(final int x, final int y) {
@@ -31,10 +36,27 @@ class DeckPile extends CardPile {
 	}
 
 	@Override
-	public void select(final int tx, final int ty) {
+	public void select(MouseEvent mouseEvent) {
 		if (empty()) {
+			getCardsBack();
 			return;
 		}
 		Solitare.discardPile.push(this.pop());
+	}
+
+	public void getCardsBack(){
+		Deque<Card> cards = new ArrayDeque<>();
+
+		for(int i =0;i<24;i++){
+			Card card = Solitare.discardPile.pop();
+			card.flip();
+			cards.add(card);
+			//reversing pile
+		}
+
+		//and getting back
+		for (int i =0;i<24;i++){
+			this.push(cards.removeFirst());
+		}
 	}
 }
