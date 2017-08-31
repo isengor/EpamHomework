@@ -1,5 +1,4 @@
 import java.applet.Applet;
-import java.awt.Event;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -7,8 +6,8 @@ import java.awt.event.MouseListener;
 public class Solitare extends Applet implements MouseListener{
 
     /*
-    - дать возможность указывать место, куда класть карту
-- дать возможность выбирать не одну карту,
+    - дать возможность указывать место, куда класть карту				@DONE
+- дать возможность выбирать не одну карту,								@DONE
   а несколько: выбрать карту и все на ней лежащие
 - по двойному клику перемещать в стопки с мастями (optional) 			@DONE
 - автоматически переворачитвать верхнюю карту рубашкой вниз в TablePile @DONE
@@ -19,6 +18,7 @@ public class Solitare extends Applet implements MouseListener{
 
 	static DeckPile deckPile;
 	static DiscardPile discardPile;
+	static SelectedCardPile selectedTableCards;
 	static TablePile tablePile[];
 	static SuitPile suitPile[];
 	static CardPile allPiles[];
@@ -29,7 +29,7 @@ public class Solitare extends Applet implements MouseListener{
 		addMouseListener(this);
 
 		// first allocate the arrays
-		allPiles = new CardPile[13];
+		allPiles = new CardPile[14];
 		suitPile = new SuitPile[4];
 		tablePile = new TablePile[7];
 		// then fill them in
@@ -41,12 +41,13 @@ public class Solitare extends Applet implements MouseListener{
 		for (int i = 0; i < 7; i++) {
 			allPiles[6 + i] = tablePile[i] = new TablePile(5 + 55 * i, 80, i + 1);
 		}
+		allPiles[13] = selectedTableCards = new SelectedCardPile();
 	}
 
 	@Override
 	public void paint(Graphics g) {
 
-		for (int i = 0; i < 13; i++) {
+		for (int i = 0; i < 14; i++) {
 			allPiles[i].display(g);
 		}
 	}
@@ -55,13 +56,16 @@ public class Solitare extends Applet implements MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		for (int i = 0; i < 13; i++) {
+		for (int i = 0; i < 14; i++) {
 			if (allPiles[i].includes(e)) {
 				allPiles[i].select(e);
 				repaint();
-				break;
+				return;
 			}
 		}
+		System.out.println("missclick");
+			selectedTableCards.dissolve();
+			repaint();
 	}
 
 	@Override

@@ -31,11 +31,11 @@ class Card {
 		link = null;
 	}
 	
-	public void draw(final Graphics g, final int x, final int y) { 
+	public void draw(final Graphics g, final int x, final int y, Color color) {
 		// clear rectangle, draw border
 
 		g.clearRect(x, y, width, height);
-		g.setColor(Color.black);
+		g.setColor(color);
 		g.drawRect(x, y, width, height);
 		// draw body of card
 		if (isFaceUp()) {

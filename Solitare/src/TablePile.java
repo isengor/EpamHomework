@@ -3,15 +3,21 @@ import java.awt.event.MouseEvent;
 
 class TablePile extends CardPile {
 
+	int c;  // start cards count
+
 	TablePile(int x, int y, int c) {
 		// initialize the parent class
 		super(x, y);
 		// then initialize our pile of cards
+
+		this.c = c;
+
 		for (int i = 0; i < c; i++) {
 			push(Solitare.deckPile.pop());
 		}
 		// flip topmost card face up
 		top().flip();
+
 	}
 
 
@@ -26,61 +32,87 @@ class TablePile extends CardPile {
 	}
 
 	@Override
+	public int getPileBottom() {
+		int bottom = y;
+		if (cardscount==0){
+			bottom+=35;
+		}
+		if(cardscount==1){
+			bottom+=Card.height;
+		}
+		else if(cardscount>1){
+			bottom += (cardscount-1)*35+Card.height;
+		}
+		return bottom;
+	}
+
+	@Override
 	public boolean includes(MouseEvent mouseEvent) {
+
 		int tx = mouseEvent.getX();
 		int ty = mouseEvent.getY();
 
-		// doesn't test bottom of card
-		return x <= tx && tx <= x + Card.width && y <= ty;
+		return tx >= x && tx <= x + Card.width && ty >= y && ty <= getPileBottom(); //
 	}
 
 	@Override
 	public void select(MouseEvent mouseEvent) {
-		if (empty()) {
+		System.out.println("table pile " + c + " bottom " + getPileBottom());
+
+		if (empty() && Solitare.selectedTableCards.empty()) {
 			return;
 		}
 
-		// if face down, then flip
-		Card topCard = top();
-		if (!topCard.isFaceUp()) {
-			topCard.flip();
-			return;
-		}
+			int selectedcardscount = cardscount - getClikedCardNumber(mouseEvent); //count chosen cards
 
+			if (Solitare.selectedTableCards.empty()) {    //if
 
-
-		// else see if any suit pile can take card
-		topCard = pop();
-
-		if(mouseEvent.getClickCount()==2) { //double click listener
-			System.out.println("double");
-			for (int i = 0; i < 4; i++) {
-				if (Solitare.suitPile[i].canTake(topCard)) {    //смотрим можем ли мы закинуть карту наверх в suitpile
-					if(topCard.link!=null){
-						topCard.link.flip();
+				for (int i = 0; i < selectedcardscount + 1; i++) {
+					if (top().isFaceUp()) {
+						Solitare.selectedTableCards.push(pop(), x, y, c - 1);
 					}
-					Solitare.suitPile[i].push(topCard);            //и есди да, соответственно кидаем её в подходящую колоду
-
-					return;
 				}
 			}
+
+			else {
+
+				if (this.canTake(Solitare.selectedTableCards.last())) {
+					//pushing all the cards from the selectedcardpile
+					while (!Solitare.selectedTableCards.empty()) {
+						push(Solitare.selectedTableCards.pop());
+					}
+
+					if (!Solitare.tablePile[Solitare.selectedTableCards.supplierPileNumb].empty()) {
+						//flipping topcard of the supplier pile if it's not empty
+						if (!Solitare.tablePile[Solitare.selectedTableCards.supplierPileNumb].top().isFaceUp())
+							Solitare.tablePile[Solitare.selectedTableCards.supplierPileNumb].top().flip();
+					}
+				}
+			}
+	}
+
+	public int getClikedCardNumber(MouseEvent mouseEvent){
+		int cardNumb = 0;
+		int localY = y;
+
+		for(int i = 1;i<=cardscount;i++){
+			if(mouseEvent.getX() >= x && mouseEvent.getX() <= x+Card.width &&
+					mouseEvent.getY() >= localY && mouseEvent.getY() <= localY+35){
+				cardNumb = i;
+				break;
+			}
+
+			if(i==cardscount){   //top card clickable area x2 higher
+				if(mouseEvent.getX() >= x && mouseEvent.getX() <= x+Card.width &&
+						mouseEvent.getY() >= localY && mouseEvent.getY() <= localY+Card.height){
+					cardNumb = i;
+					break;
+				}
+			}
+			localY+=35;
 		}
-		//TODO: мы должны сначала выделить карту по которой был клик, а уже затем проверять куда был сделан следующий клик
-		//TODO: и только тогда перекидываем карту или же снимаем выделение цветом
 
-		// else see if any other table pile can take card
-//		for (int i = 0; i < 7; i++) {
-//			if (Solitare.tablePile[i].canTake(topCard)) {
-//				topCard.link.flip();
-//				Solitare.tablePile[i].push(topCard);				//а здесь мы пробегаемся по колодам на столе, и перекидываем
-//											//карту в подходящую колоду
-//				return;
-//			}
-//		}
-
-
-		// else put it back on our pile
-		push(topCard);
+		return cardNumb;
 	}
 
 	private int stackDisplay(Graphics g, Card aCard) {
@@ -90,7 +122,7 @@ class TablePile extends CardPile {
 			return y;
 		}
 		localy = stackDisplay(g, aCard.link);
-		aCard.draw(g, x, localy);
+		aCard.draw(g, x, localy,Color.BLACK);
 		return localy + 35;
 	}
 

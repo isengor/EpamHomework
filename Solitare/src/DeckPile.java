@@ -37,6 +37,7 @@ class DeckPile extends CardPile {
 
 	@Override
 	public void select(MouseEvent mouseEvent) {
+
 		if (empty()) {
 			getCardsBack();
 			return;
@@ -45,18 +46,16 @@ class DeckPile extends CardPile {
 	}
 
 	public void getCardsBack(){
-		Deque<Card> cards = new ArrayDeque<>();
+		CardPile buferPile = new CardPile();  //for reverse
 
-		for(int i =0;i<24;i++){
+		while (!Solitare.discardPile.empty()){
 			Card card = Solitare.discardPile.pop();
 			card.flip();
-			cards.add(card);
-			//reversing pile
+			buferPile.push(card);
 		}
 
-		//and getting back
-		for (int i =0;i<24;i++){
-			this.push(cards.removeFirst());
+		while (!buferPile.empty()){
+			push(buferPile.pop());
 		}
 	}
 }
