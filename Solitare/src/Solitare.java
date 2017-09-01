@@ -1,5 +1,5 @@
 import java.applet.Applet;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -42,6 +42,9 @@ public class Solitare extends Applet implements MouseListener{
 			allPiles[6 + i] = tablePile[i] = new TablePile(5 + 55 * i, 80, i + 1);
 		}
 		allPiles[13] = selectedTableCards = new SelectedCardPile();
+
+		this.setSize(400,400);
+
 	}
 
 	@Override

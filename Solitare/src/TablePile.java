@@ -57,13 +57,12 @@ class TablePile extends CardPile {
 
 	@Override
 	public void select(MouseEvent mouseEvent) {
-		System.out.println("table pile " + c + " bottom " + getPileBottom());
 
 		if (empty() && Solitare.selectedTableCards.empty()) {
 			return;
 		}
 
-			int selectedcardscount = cardscount - getClikedCardNumber(mouseEvent); //count chosen cards
+			int selectedcardscount = cardscount - getClickedCardNumb(mouseEvent); //count chosen cards
 
 			if (Solitare.selectedTableCards.empty()) {    //if
 
@@ -91,7 +90,7 @@ class TablePile extends CardPile {
 			}
 	}
 
-	public int getClikedCardNumber(MouseEvent mouseEvent){
+	public int getClickedCardNumb(MouseEvent mouseEvent){
 		int cardNumb = 0;
 		int localY = y;
 
@@ -102,7 +101,7 @@ class TablePile extends CardPile {
 				break;
 			}
 
-			if(i==cardscount){   //top card clickable area x2 higher
+			if(i==cardscount){   //top card clickable area x2 bigger
 				if(mouseEvent.getX() >= x && mouseEvent.getX() <= x+Card.width &&
 						mouseEvent.getY() >= localY && mouseEvent.getY() <= localY+Card.height){
 					cardNumb = i;

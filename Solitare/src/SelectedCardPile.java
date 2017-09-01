@@ -17,15 +17,13 @@ public class SelectedCardPile extends CardPile{
 
     @Override
     public boolean includes(MouseEvent mouseEvent) {
-        System.out.println(getPileBottom());
-        int tx = mouseEvent.getX();
-        int ty = mouseEvent.getY();
-
-        return tx >= x && tx <= x + Card.width && ty >= y && ty <= getPileBottom(); //
+        return mouseEvent.getX() >= x && mouseEvent.getX() <= x + Card.width &&
+                mouseEvent.getY() >= y &&  mouseEvent.getY() <= getPileBottom();
     }
 
     @Override
     public void select(MouseEvent mouseEvent) {
+        //double click listener
         if (mouseEvent.getClickCount()==2){
             for (int i = 0; i < 4; i++) {
                 if (Solitare.suitPile[i].canTake(Solitare.selectedTableCards.top())) {
